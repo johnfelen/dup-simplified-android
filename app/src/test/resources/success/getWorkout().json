@@ -1,0 +1,77 @@
+{
+  "primaryMovementPattern": "Hip Hinge",
+  "lifts": [
+    {
+      "liftName": "DEADLIFT",
+      "warmUpSets": [
+        {
+          "reps": 3,
+          "plateCounts": [
+            {
+              "plate": "BLUE_BUMPER",
+              "count": 2
+            },
+            {
+              "plate": "GREEN_BUMPER",
+              "count": 1
+            }
+          ]
+        },
+        {
+          "reps": 3,
+          "plateCounts": [
+            {
+              "plate": "BLUE_BUMPER",
+              "count": 2
+            },
+            {
+              "plate": "GREEN_BUMPER",
+              "count": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "liftName": "BENCH_PRESS",
+      "warmUpSets": [
+        {
+          "reps": 5,
+          "plateCounts": [
+            {
+              "plate": "BLUE_BUMPER",
+              "count": 1
+            },
+            {
+              "plate": "WHITE_CHANGE",
+              "count": 2
+            }
+          ]
+        },
+        {
+          "reps": 3,
+          "plateCounts": [
+            {
+              "plate": "BLUE_BUMPER",
+              "count": 2
+            },
+            {
+              "plate": "BLUE_CHANGE",
+              "count": 1
+            }
+          ]
+        }
+      ],
+      "workSet": {
+        "reps": 6,
+        "plateCounts": [
+          {
+            "plate": "BLUE_BUMPER",
+            "count": 3
+          }
+        ]
+      },
+      "workSetCount": 6
+    }
+  ]
+}
