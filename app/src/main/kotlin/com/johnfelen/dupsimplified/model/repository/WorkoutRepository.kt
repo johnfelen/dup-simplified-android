@@ -14,5 +14,5 @@ class WorkoutRepository(private val workoutDao: WorkoutDao, private val workoutS
         updateOneRepMax(liftName, repsInLastSet).takeIf { it.isSuccessful }?.body()!!
     }.getOrNull()
 
-    fun completeWorkout(movementPattern: MovementPatterns) = workoutDao.delete(movementPattern.toString())
+    fun completeWorkout(movementPattern: MovementPatterns?) = workoutDao.delete(movementPattern.toString())
 }

@@ -6,6 +6,10 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.johnfelen.dupsimplified.model.repository.WorkoutRepository
 import com.johnfelen.dupsimplified.model.service.WorkoutService
 import com.johnfelen.dupsimplified.model.storage.database.WorkoutDatabase
+import com.johnfelen.dupsimplified.viewmodel.WorkoutViewModel
+import com.johnfelen.dupsimplified.viewmodel.ViewModelFactory
+import com.johnfelen.dupsimplified.viewmodel.bindViewModel
+import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -18,9 +22,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class DUPSimplifiedApplication: Application(), KodeinAware {
     override val kodein = Kodein.lazy {
+        import(viewModelModule)
         import(repositoryModule)
         import(storageModule)
         import(serviceModule)
+    }
+
+    private val viewModelModule = Kodein.Module("ViewModel") {
+        bind() from singleton { ViewModelFactory(kodein) }
+        bindViewModel<WorkoutViewModel>() with provider { WorkoutViewModel(instance()) }
     }
 
     private val repositoryModule = Kodein.Module("Repository") {

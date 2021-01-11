@@ -2,6 +2,7 @@ package util
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.*
 import org.junit.rules.TestRule
 import org.junit.runner.Description
@@ -24,5 +25,7 @@ class TestCoroutineRule: TestRule {
         }
     }
 
-    fun runBlockingTest(block: suspend TestCoroutineRule.() -> Unit) = testCoroutineScope.runBlockingTest { block() }
+    fun runTest(block: suspend TestCoroutineRule.() -> Unit) {
+        testCoroutineScope.launch { block() }
+    }
 }
