@@ -4,8 +4,8 @@ import com.johnfelen.dupsimplified.model.service.WorkoutService
 import com.johnfelen.dupsimplified.model.storage.dao.WorkoutDao
 import com.johnfelen.dupsimplified.model.storage.entity.data.workout.Lift
 import com.johnfelen.dupsimplified.model.storage.entity.data.workout.Workout
-import com.johnfelen.dupsimplified.model.storage.entity.enum.workout.LiftNames
-import com.johnfelen.dupsimplified.model.storage.entity.enum.workout.MovementPatterns
+import com.johnfelen.dupsimplified.model.storage.entity.enumerator.workout.LiftNames
+import com.johnfelen.dupsimplified.model.storage.entity.enumerator.workout.MovementPatterns
 import com.nhaarman.mockitokotlin2.*
 import kotlinx.coroutines.runBlocking
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -46,10 +46,10 @@ class WorkoutRepositoryTest {
         val expectedWorkout = Workout(movementPattern.toString(), listOf(Lift()))
 
         doReturn(null).whenever(workoutDao).get(any())
-        doReturn(Response.success(expectedWorkout)).whenever(workoutService).getWorkout(movementPattern)
+        doReturn(Response.success(expectedWorkout)).whenever(workoutService).getWorkout(movementPattern.name)
 
         val actualWorkout = workoutRepository.getWorkout(movementPattern)
-        verify(workoutService, times(1)).getWorkout(movementPattern)
+        verify(workoutService, times(1)).getWorkout(movementPattern.name)
         verify(workoutDao, times(1)).insert(actualWorkout!!)
         assertEquals(expectedWorkout, actualWorkout)
     }
@@ -61,10 +61,10 @@ class WorkoutRepositoryTest {
         val errorResponse = Response.error<String>(400, "".toResponseBody("application/json".toMediaTypeOrNull()))
 
         doReturn(workoutDaoReturn).whenever(workoutDao).get(any())
-        doReturn(errorResponse).whenever(workoutService).getWorkout(movementPattern)
+        doReturn(errorResponse).whenever(workoutService).getWorkout(movementPattern.name)
 
         assertNull(workoutRepository.getWorkout(movementPattern))
-        verify(workoutService, times(1)).getWorkout(movementPattern)
+        verify(workoutService, times(1)).getWorkout(movementPattern.name)
         verify(workoutDao, never()).insert(workout)
     }
 
@@ -73,7 +73,7 @@ class WorkoutRepositoryTest {
         val repsInLastSet = 1
         val expectedNewMax = 100.0
 
-        doReturn(Response.success(expectedNewMax)).whenever(workoutService).updateOneRepMax(liftName, repsInLastSet)
+        doReturn(Response.success(expectedNewMax)).whenever(workoutService).updateOneRepMax(liftName.name, repsInLastSet)
 
         val actualNewMax = workoutRepository.updateOneRepMax(liftName, repsInLastSet)
         assertEquals(expectedNewMax, actualNewMax)
@@ -85,7 +85,7 @@ class WorkoutRepositoryTest {
         val expectedNewMax = null
         val errorResponse = Response.error<String>(400, "".toResponseBody("application/json".toMediaTypeOrNull()))
 
-        doReturn(errorResponse).whenever(workoutService).updateOneRepMax(liftName, repsInLastSet)
+        doReturn(errorResponse).whenever(workoutService).updateOneRepMax(liftName.name, repsInLastSet)
 
         val actualNewMax = workoutRepository.updateOneRepMax(liftName, repsInLastSet)
         assertEquals(expectedNewMax, actualNewMax)

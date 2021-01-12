@@ -1,4 +1,4 @@
-package com.johnfelen.dupsimplified.model.storage.entity.enum.workout
+package com.johnfelen.dupsimplified.model.storage.entity.enumerator.workout
 
 enum class LiftNames {
     DEADLIFT { override fun toString() = "Deadlift" },

@@ -4,24 +4,21 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.johnfelen.dupsimplified.model.repository.WorkoutRepository
 import com.johnfelen.dupsimplified.model.storage.entity.data.workout.Lift
 import com.johnfelen.dupsimplified.model.storage.entity.data.workout.Workout
-import com.johnfelen.dupsimplified.model.storage.entity.enum.workout.LiftNames
-import com.johnfelen.dupsimplified.model.storage.entity.enum.workout.MovementPatterns
+import com.johnfelen.dupsimplified.model.storage.entity.enumerator.workout.LiftNames
+import com.johnfelen.dupsimplified.model.storage.entity.enumerator.workout.MovementPatterns
 import com.jraska.livedata.test
 import com.nhaarman.mockitokotlin2.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.mockito.Spy
-import org.mockito.junit.jupiter.MockitoExtension
 import util.TestCoroutineRule
 
 @ExperimentalCoroutinesApi
-@ExtendWith(MockitoExtension::class)
 class WorkoutViewModelTest {
     @get:Rule val testCoroutineRule = TestCoroutineRule()
 
@@ -33,9 +30,7 @@ class WorkoutViewModelTest {
     @Spy @InjectMocks
     private lateinit var workoutViewModel: WorkoutViewModel
 
-    @Before fun setUp() {
-        MockitoAnnotations.initMocks(this)
-    }
+    @Before fun setUp() = MockitoAnnotations.initMocks(this)
 
     @Test fun `when startWorkout() is called with valid movementPattern, Loading and valid Success should be posted`() = testCoroutineRule.runTest {
         val movementPattern = MovementPatterns.SQUAT
@@ -51,7 +46,7 @@ class WorkoutViewModelTest {
         }
     }
 
-    @Test fun `when updateOneRepMax() is called but it is not the lasoutObservert lift, Loading and valid Success should be posted and completeWorkout() should not be called`() = testCoroutineRule.runTest {
+    @Test fun `when updateOneRepMax() is called but it is not the last lift, Loading and valid Success should be posted and completeWorkout() should not be called`() = testCoroutineRule.runTest {
         val movementPattern = MovementPatterns.SQUAT
         val liftName = LiftNames.Z_PRESS
         val repsInLastSet = 7

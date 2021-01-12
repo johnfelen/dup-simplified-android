@@ -2,7 +2,6 @@ package com.johnfelen.dupsimplified.model.storage.dao
 
 import androidx.room.*
 import com.johnfelen.dupsimplified.model.storage.entity.data.workout.Workout
-import com.johnfelen.dupsimplified.model.storage.entity.enum.workout.MovementPatterns
 
 @Dao interface WorkoutDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE) fun insert(workout: Workout)

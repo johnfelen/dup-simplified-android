@@ -11,9 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DUPSimplified">
         <activity
-            android:name=".view.adapter.MainActivity"
+            android:name=".view.activity.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.DUPSimplified.NoActionBar">
+            android:theme="@style/Theme.DUPSimplified.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,4 +23,7 @@
         </activity>
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 </manifest>

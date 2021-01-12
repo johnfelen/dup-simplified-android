@@ -6,9 +6,8 @@ import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.viewModelScope
 import com.johnfelen.dupsimplified.model.repository.WorkoutRepository
 import com.johnfelen.dupsimplified.model.storage.entity.data.workout.Workout
-import com.johnfelen.dupsimplified.model.storage.entity.enum.workout.LiftNames
-import com.johnfelen.dupsimplified.model.storage.entity.enum.workout.MovementPatterns
-import kotlinx.coroutines.CoroutineDispatcher
+import com.johnfelen.dupsimplified.model.storage.entity.enumerator.workout.LiftNames
+import com.johnfelen.dupsimplified.model.storage.entity.enumerator.workout.MovementPatterns
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -26,7 +25,7 @@ class WorkoutViewModel(private val workoutRepository: WorkoutRepository): ViewMo
 
         selectedPrimaryMovementPattern = movementPattern
         viewModelScope.launch(Dispatchers.Default) {
-            _selectedWorkout.postValue(createResource(workoutRepository.getWorkout(movementPattern)))
+            _selectedWorkout.postValue(createResource(workoutRepository.getWorkout(movementPattern)).also(::println))
         }
     }
 
@@ -37,7 +36,7 @@ class WorkoutViewModel(private val workoutRepository: WorkoutRepository): ViewMo
             _newOneRepMax.postValue(createResource(workoutRepository.updateOneRepMax(liftName, repsInLastSet)))
 
             _selectedWorkout.value?.let { workout ->
-                if(workout is Resource.Success && workout.data.lifts.last().liftName == liftName) workoutRepository.completeWorkout(selectedPrimaryMovementPattern)
+                if(workout is Resource.Success && workout.data.lifts.last().liftName == liftName) workoutRepository.completeWorkout(selectedPrimaryMovementPattern!!)
             }
         }
     }

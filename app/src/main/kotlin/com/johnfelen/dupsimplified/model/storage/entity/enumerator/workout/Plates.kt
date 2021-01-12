@@ -1,4 +1,4 @@
-package com.johnfelen.dupsimplified.model.storage.entity.enum.workout
+package com.johnfelen.dupsimplified.model.storage.entity.enumerator.workout
 
 enum class Plates {
     BLUE_BUMPER { override fun toString() = "Blue Bumper" },

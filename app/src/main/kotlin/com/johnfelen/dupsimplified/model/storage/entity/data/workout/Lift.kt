@@ -1,6 +1,6 @@
 package com.johnfelen.dupsimplified.model.storage.entity.data.workout
 
-import com.johnfelen.dupsimplified.model.storage.entity.enum.workout.LiftNames
+import com.johnfelen.dupsimplified.model.storage.entity.enumerator.workout.LiftNames
 
 data class Lift(
     val liftName: LiftNames = LiftNames.DEADLIFT,

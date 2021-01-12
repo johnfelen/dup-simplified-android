@@ -5,7 +5,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.johnfelen.dupsimplified.model.storage.database.WorkoutDatabase
 import com.johnfelen.dupsimplified.model.storage.entity.data.workout.Workout
-import com.johnfelen.dupsimplified.model.storage.entity.enum.workout.MovementPatterns
+import com.johnfelen.dupsimplified.model.storage.entity.enumerator.workout.MovementPatterns
 import junit.framework.Assert.assertNull
 import junit.framework.TestCase.assertEquals
 import org.junit.After
@@ -30,7 +30,7 @@ class WorkoutDaoTest {
     }
 
     @Test fun insert() = workoutDao.run {
-        val workoutToReplace = Workout(MovementPatterns.HORIZONTAL_PUSH.toString())
+        val workoutToReplace = Workout(MovementPatterns.HORIZONTAL_PUSH.name)
 
         insert(workoutToReplace)
         insert(workoutToReplace)
@@ -38,7 +38,7 @@ class WorkoutDaoTest {
     }
 
     @Test fun get() = workoutDao.run {
-        val expectedWorkout = Workout(MovementPatterns.HIP_HINGE.toString())
+        val expectedWorkout = Workout(MovementPatterns.HIP_HINGE.name)
 
         assertNull(get(expectedWorkout.primaryMovementPattern))
         insert(expectedWorkout)
@@ -46,11 +46,11 @@ class WorkoutDaoTest {
     }
 
     @Test fun delete() = workoutDao.run {
-        val workoutToDelete = Workout(MovementPatterns.SQUAT.toString())
+        val workoutToDelete = Workout(MovementPatterns.SQUAT.name)
 
         insert(workoutToDelete)
         assertNotNull(get(workoutToDelete.primaryMovementPattern))
-        delete(MovementPatterns.SQUAT.toString())
+        delete(MovementPatterns.SQUAT.name)
         assertNull(get(workoutToDelete.primaryMovementPattern))
     }
 }

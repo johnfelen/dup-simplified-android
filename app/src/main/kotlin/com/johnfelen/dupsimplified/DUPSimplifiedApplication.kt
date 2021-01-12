@@ -6,10 +6,12 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.johnfelen.dupsimplified.model.repository.WorkoutRepository
 import com.johnfelen.dupsimplified.model.service.WorkoutService
 import com.johnfelen.dupsimplified.model.storage.database.WorkoutDatabase
+import com.johnfelen.dupsimplified.view.adapter.LiftListAdapter
+import com.johnfelen.dupsimplified.view.adapter.MovementPatternListAdapter
+import com.johnfelen.dupsimplified.view.adapter.PlateListAdapter
 import com.johnfelen.dupsimplified.viewmodel.WorkoutViewModel
 import com.johnfelen.dupsimplified.viewmodel.ViewModelFactory
 import com.johnfelen.dupsimplified.viewmodel.bindViewModel
-import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -22,10 +24,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class DUPSimplifiedApplication: Application(), KodeinAware {
     override val kodein = Kodein.lazy {
+        import(adapterModule)
         import(viewModelModule)
         import(repositoryModule)
         import(storageModule)
         import(serviceModule)
+    }
+
+    private val adapterModule = Kodein.Module("Adapter") {
+        bind() from provider { MovementPatternListAdapter() }
+        bind() from provider { LiftListAdapter() }
+        bind() from provider { PlateListAdapter() }
     }
 
     private val viewModelModule = Kodein.Module("ViewModel") {
@@ -57,7 +66,7 @@ class DUPSimplifiedApplication: Application(), KodeinAware {
 
         bind() from singleton {
             instance<Retrofit.Builder>()
-                .baseUrl("http://daily-undulating-periodization.herokuapp.com/dupsimplified/workout/")
+                .baseUrl("https://daily-undulating-periodization.herokuapp.com/")
                 .build()
                 .create(WorkoutService::class.java)
         }

@@ -4,9 +4,9 @@ import com.johnfelen.dupsimplified.model.storage.entity.data.workout.Lift
 import com.johnfelen.dupsimplified.model.storage.entity.data.workout.PlateCount
 import com.johnfelen.dupsimplified.model.storage.entity.data.workout.Set
 import com.johnfelen.dupsimplified.model.storage.entity.data.workout.Workout
-import com.johnfelen.dupsimplified.model.storage.entity.enum.workout.LiftNames
-import com.johnfelen.dupsimplified.model.storage.entity.enum.workout.MovementPatterns
-import com.johnfelen.dupsimplified.model.storage.entity.enum.workout.Plates
+import com.johnfelen.dupsimplified.model.storage.entity.enumerator.workout.LiftNames
+import com.johnfelen.dupsimplified.model.storage.entity.enumerator.workout.MovementPatterns
+import com.johnfelen.dupsimplified.model.storage.entity.enumerator.workout.Plates
 import okhttp3.mockwebserver.MockResponse
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -47,7 +47,7 @@ class WorkoutServiceTest {
 
         it.enqueue(MockResponse().setBody(ClassLoader.getSystemResource("success/getWorkout().json")!!.readText()))
 
-        workoutService.getWorkout(validPrimaryMovementPattern).run {
+        workoutService.getWorkout(validPrimaryMovementPattern.name).run {
             assertEquals(true, isSuccessful)
             assertEquals(200, code())
             assertEquals(successfulWorkout, body())
@@ -55,7 +55,7 @@ class WorkoutServiceTest {
     }
 
     @Test fun `when getWorkout() is called and an error happens null should be returned`() = testServerRule.runServerBlocking {
-        val invalidWorkoutDay = MovementPatterns.SQUAT
+        val invalidWorkoutDay = MovementPatterns.SQUAT.name
         val errorResponseCode = Random(0).nextInt(400..599)
 
         it.enqueue(MockResponse().setResponseCode(errorResponseCode))
@@ -68,7 +68,7 @@ class WorkoutServiceTest {
     }
 
     @Test fun `when updateOneRepMax() is called with a valid liftName and repsInLastSet a successful Double should be returned`() = testServerRule.runServerBlocking {
-        val validLiftName = LiftNames.PENDLAY_ROW
+        val validLiftName = LiftNames.PENDLAY_ROW.name
         val repsInLastSet = 8
         val newTheoreticalOneRepMax = 100.5
 
@@ -82,7 +82,7 @@ class WorkoutServiceTest {
     }
 
     @Test fun `when updateOneRepMax() is called and an error happens null should be returned`() = testServerRule.runServerBlocking {
-        val invalidLiftName = LiftNames.UNILATERAL_GLIDING_HAMSTRING_CURL
+        val invalidLiftName = LiftNames.UNILATERAL_GLIDING_HAMSTRING_CURL.name
         val repsInLastSet = 8
         val errorResponseCode = Random(0).nextInt(400..599)
 
