@@ -31,16 +31,16 @@ class WorkoutServiceTest {
             listOf(
                 Lift(LiftNames.DEADLIFT,
                     listOf(
-                        Set(3, listOf(PlateCount(Plates.BLUE_BUMPER, 2), PlateCount(Plates.GREEN_BUMPER, 1))),
-                        Set(3, listOf(PlateCount(Plates.BLUE_BUMPER, 2), PlateCount(Plates.GREEN_BUMPER, 1)))
+                        Set(3, listOf(PlateCount(Plates.RED, 2), PlateCount(Plates.BLUE, 1))),
+                        Set(3, listOf(PlateCount(Plates.RED, 2), PlateCount(Plates.BLUE, 1)))
                     )
                 ),
                 Lift(LiftNames.BENCH_PRESS,
                     listOf(
-                        Set(5, listOf(PlateCount(Plates.BLUE_BUMPER, 1), PlateCount(Plates.WHITE_CHANGE, 2))),
-                        Set(3, listOf(PlateCount(Plates.BLUE_BUMPER, 2), PlateCount(Plates.BLUE_CHANGE, 1)))
+                        Set(5, listOf(PlateCount(Plates.RED, 1), PlateCount(Plates.YELLOW, 2))),
+                        Set(3, listOf(PlateCount(Plates.RED, 2), PlateCount(Plates.GREEN, 1)))
                     ),
-                    Set(6, listOf(PlateCount(Plates.BLUE_BUMPER, 3))), 6
+                    Set(6, listOf(PlateCount(Plates.RED, 3))), 6
                 )
             )
         )

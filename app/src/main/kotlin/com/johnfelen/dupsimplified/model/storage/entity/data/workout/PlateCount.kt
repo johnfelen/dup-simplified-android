@@ -6,6 +6,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class PlateCount(
-    val plate: Plates = Plates.BLUE_BUMPER,
+    val plate: Plates = Plates.RED,
     val count: Int = 0
 ): Parcelable
