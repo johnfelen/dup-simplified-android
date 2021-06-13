@@ -23,7 +23,7 @@ class LiftListAdapter: ListAdapter<Lift, LiftListAdapter.ViewHolder>(LiftListAda
 
             root.setOnClickListener {
                 item.warmUpSets.plus(List(item.workSetCount) { item.workSet }).toTypedArray().let { sets ->
-                    it.findNavController().navigate(WorkoutFragmentDirections.actionWorkoutFragmentToSetFragment(sets))
+                    it.findNavController().navigate(WorkoutFragmentDirections.actionWorkoutFragmentToSetFragment(sets, item.liftName))
                 }
             }
 

@@ -82,7 +82,7 @@ class WorkoutServiceTest {
     }
 
     @Test fun `when updateOneRepMax() is called and an error happens null should be returned`() = testServerRule.runServerBlocking {
-        val invalidLiftName = LiftNames.UNILATERAL_GLIDING_HAMSTRING_CURL.name
+        val invalidLiftName = LiftNames.RING_GLIDING_HAMSTRING_CURL.name
         val repsInLastSet = 8
         val errorResponseCode = Random(0).nextInt(400..599)
 

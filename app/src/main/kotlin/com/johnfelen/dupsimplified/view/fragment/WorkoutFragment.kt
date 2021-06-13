@@ -2,6 +2,7 @@ package com.johnfelen.dupsimplified.view.fragment
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -32,6 +33,14 @@ class WorkoutFragment: Fragment(R.layout.fragment_workout), KodeinAware {
                 is Resource.Success -> recycler_view_lifts.fillView(liftListAdapter, it.data.lifts, 1)
                 is Resource.Error -> findNavController().popBackStack()
             }
+        }
+
+        workoutViewModel.newOneRepMax.observe(viewLifecycleOwner) {
+            when(it) {
+                is Resource.Success -> Toast.makeText(context, "New 1RM is ${it.data}", Toast.LENGTH_LONG).show()
+                is Resource.Error -> Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
 }

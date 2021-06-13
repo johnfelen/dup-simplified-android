@@ -23,6 +23,15 @@
             android:gravity="bottom"
             android:text="@{setProgress}"/>
 
+        <EditText
+            android:id="@+id/last_set_reps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="0"/>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_next_set"
             android:layout_width="wrap_content"

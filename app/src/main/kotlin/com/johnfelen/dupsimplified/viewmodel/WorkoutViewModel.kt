@@ -21,6 +21,7 @@ class WorkoutViewModel(private val workoutRepository: WorkoutRepository): ViewMo
     val newOneRepMax = _newOneRepMax.distinctUntilChanged()
 
     fun getWorkout(movementPattern: MovementPatterns) {
+        _newOneRepMax.value = createResource(isLoading = true)  //probably not good pracitce but sort of done right now
         _selectedWorkout.value = createResource(isLoading = true)
 
         selectedPrimaryMovementPattern = movementPattern

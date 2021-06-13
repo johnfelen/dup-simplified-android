@@ -41,6 +41,9 @@
             android:name="sets"
             app:argType="com.johnfelen.dupsimplified.model.storage.entity.data.workout.Set[]" />
         <argument
+            android:name="liftName"
+            app:argType="com.johnfelen.dupsimplified.model.storage.entity.enumerator.workout.LiftNames" />
+        <argument
             android:name="currentSetIndex"
             app:argType="integer"
             android:defaultValue="0" />
